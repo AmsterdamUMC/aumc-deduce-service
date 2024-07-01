@@ -1,15 +1,17 @@
 # Deduce Service
 
-> :warning: This repository is no longer maintained/updated, but please feel free to use it for inspiration.
+> This is a fork from the original, no longer maintained/updated, repo from UMCU.
 
-Web Service for [Deduce](https://github.com/vmenger/deduce), to be used in pipelines such as [CogStack-NiFi](https://github.com/cogstack/cogstack-nifi).
+Web Service for [Deduce](https://github.com/AmsterdamUMC/aumc-deduce), to be used in pipelines such as [CogStack-NiFi](https://github.com/cogstack/cogstack-nifi).
 
 
 
 ## Installation
-```bash
-docker-compose up
-```
+We do not use a docker container to run this.
+
+- clone the repo to you r environment.
+- pip install install Gunicorn and Flask with their dependencies
+- start gunicorn with the installed dedice-service/app
 
 The API should now be available at http://localhost:5000/
 
