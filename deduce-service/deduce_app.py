@@ -9,6 +9,7 @@ from examples import example_text, example_texts
 from flask import Flask, abort, request
 from flask_restx import Api, Resource, fields
 from werkzeug.middleware.proxy_fix import ProxyFix
+import re
 
 deduce_model = initialize_deduce()
 __version__ = '0.0.3'
@@ -128,7 +129,7 @@ def annotate_text(data):
     if ("patient_first_names" in data) or ("patient_surname" in data):
         deduce_args["metadata"] = dict()
         deduce_args["metadata"]["patient"] = Person.from_keywords(
-            patient_first_names=data.get("patient_first_names", None),
+             patient_first_names=re.sub(' +', ' ',data.get("patient_first_names", None)),
             patient_surname=data.get("patient_surname", None),
         )
 
