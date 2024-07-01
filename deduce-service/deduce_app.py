@@ -4,14 +4,14 @@ from typing import Optional
 
 import deduce
 from deduce.person import Person
-from deduce_model import initialize_deduce
+from deduce_model import initialize_deduce, version as config_version
 from examples import example_text, example_texts
 from flask import Flask, abort, request
 from flask_restx import Api, Resource, fields
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 deduce_model = initialize_deduce()
-__version__ = '0.0.1'
+__version__ = '0.0.3'
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
@@ -109,7 +109,7 @@ def format_result(input_data: dict, output_text: Optional[str]) -> dict:
 
     result = {
         "text": output_text,
-        "version": f"deduce_{deduce.__version__}_deduce-service_{__version__}"
+        "version": f"deduce_{deduce.__version__}_{config_version}_deduce-service_{__version__}"
     }
 
     if input_data.get("id", None):
@@ -163,10 +163,10 @@ def annotate_text_bulk(data):
     """
     Run multiple texts through the Deduce pipeline in parallel
     """
-    with multiprocessing.Pool() as pool:
-        result = pool.map(annotate_text, data)
-
-    result = {"texts": result}
+    #with multiprocessing.Pool() as pool:
+    #    result = pool.map(annotate_text, data)
+    result = map(annotate_text, data)
+    result = {"texts": list(result)}
     return result
 
 
