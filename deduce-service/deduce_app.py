@@ -131,6 +131,7 @@ def annotate_text(data):
         deduce_args["metadata"]["patient"] = Person.from_keywords(
              patient_first_names=re.sub(' +', ' ',data.get("patient_first_names", None)),
             patient_surname=data.get("patient_surname", None),
+            patient_id=data.get("patient_id", None)
         )
 
     if data.get("disabled", None):
