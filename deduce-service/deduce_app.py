@@ -12,7 +12,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 import re
 
 deduce_model = initialize_deduce()
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
